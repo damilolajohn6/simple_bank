@@ -1,7 +1,7 @@
 const supabase = require("../config/supabaseConfig");
 
 // Create a new transaction
-exports.createTransaction = async (req, res) => {
+const createTransaction = async (req, res) => {
   try {
     const { sender_id, receiver_id, amount } = req.body;
 
@@ -29,7 +29,7 @@ exports.createTransaction = async (req, res) => {
 };
 
 // Fetch a user's transaction history
-exports.getUserTransactions = async (req, res) => {
+const getUserTransactions = async (req, res) => {
   try {
     const user_id = req.user.id; // Assuming you have user data in the request object
 
@@ -54,4 +54,10 @@ exports.getUserTransactions = async (req, res) => {
       .status(500)
       .json({ message: "Failed to fetch user transactions" });
   }
+};
+
+
+module.exports = {
+    getUserTransactions,
+    createTransaction,
 };

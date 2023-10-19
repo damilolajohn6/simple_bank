@@ -1,7 +1,7 @@
 const supabase = require("../config/supabaseConfig");
 
 // Create a new bill
-exports.createBill = async (req, res) => {
+const createBill = async (req, res) => {
   try {
     const { payee, amount, due_date, user_id } = req.body;
 
@@ -30,7 +30,7 @@ exports.createBill = async (req, res) => {
 };
 
 // Pay a bill
-exports.payBill = async (req, res) => {
+const payBill = async (req, res) => {
   try {
     const { billId } = req.body;
 
@@ -55,7 +55,7 @@ exports.payBill = async (req, res) => {
 };
 
 // Fetch a user's bill history
-exports.getUserBills = async (req, res) => {
+const getUserBills = async (req, res) => {
   try {
     const user_id = req.user.id; // Authenticated user's ID
 
@@ -75,4 +75,10 @@ exports.getUserBills = async (req, res) => {
     console.error(error);
     return res.status(500).json({ message: "Failed to fetch user bills" });
   }
+};
+
+module.exports = {
+    createBill,
+    payBill,
+    getUserBills,
 };
