@@ -1,7 +1,7 @@
-// const { createClient } = require('@supabase/supabase-js');
+const { createClient } = require('@supabase/supabase-js');
 
 // const supabase = createClient('YOUR_SUPABASE_PROJECT_URL', 'YOUR_SUPABASE_API_KEY');
-import { createClient } from "@supabase/supabase-js";
+// const { createClient } from "@supabase/supabase-js";
 require('dotenv').config();
 
 const supabaseUrl = "https://paqatbrjdbtmcnnhuczm.supabase.co";

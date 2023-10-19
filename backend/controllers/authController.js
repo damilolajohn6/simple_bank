@@ -14,7 +14,21 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: error.message });
     }
 
-    // Registration successful
+    // Registration successful - You can also insert the user's KYC information into the 'users' table here
+    const { data, error: dbError } = await supabase.from("users").upsert([
+      {
+        email,
+        full_name: req.body.full_name,
+        date_of_birth: req.body.date_of_birth,
+        address: req.body.address,
+        identity_document: req.body.identity_document,
+      },
+    ]);
+
+    if (dbError) {
+      return res.status(500).json({ message: "Registration failed" });
+    }
+
     return res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);
@@ -68,19 +82,31 @@ const getCurrentUser = (req, res) => {
 };
 
 // Get user profile (requires authentication)
-exports.getUserProfile = async (req, res) => {
+const getUserProfile = async ( req, res) => {
   try {
     const user = req.user; // Authenticated user obtained from middleware
-    return res.status(200).json({ user });
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", user.email)
+      .single();
+
+    if (error) {
+      return res.status(500).json({ message: "Failed to fetch user profile" });
+    }
+
+    return res.status(200).json(data);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Failed to fetch user profile' });
+    return res.status(500).json({ message: "Failed to fetch user profile" });
   }
 };
+
 
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
   getCurrentUser,
+  getUserProfile,
 };
