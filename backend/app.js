@@ -7,10 +7,15 @@ app.use(cors());
 app.use(express.json());
 
 // Import API routes
-const authRoutes = require('./routes/api/authRoutes'); // Example route, you should have others too
+const authRoutes = require('./routes/api/authRoutes');
+const billRoutes = require('./routes/api/billRoutes');
+const transactionRoutes = require('./routes/api/transactionRoutes');
 
 // Use API routes
-app.use('/api/auth', authRoutes); // Example route, you should have others too
+app.use('/api/auth', authRoutes);
+app.use('/api/billing', billRoutes);
+app.use('/api/transaction', transactionRoutes);
+
 
 module.exports = app;
 
