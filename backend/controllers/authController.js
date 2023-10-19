@@ -67,6 +67,17 @@ const getCurrentUser = (req, res) => {
   return res.status(200).json(user);
 };
 
+// Get user profile (requires authentication)
+exports.getUserProfile = async (req, res) => {
+  try {
+    const user = req.user; // Authenticated user obtained from middleware
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Failed to fetch user profile' });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
