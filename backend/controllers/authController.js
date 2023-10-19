@@ -82,12 +82,12 @@ const getCurrentUser = (req, res) => {
 };
 
 // Get user profile (requires authentication)
-const getUserProfile = async ( req, res) => {
+const getUserProfile = async (req, res) => {
   try {
     const user = req.user; // Authenticated user obtained from middleware
     const { data, error } = await supabase
       .from("users")
-      .select("*")
+      .select("*") // Select all columns
       .eq("email", user.email)
       .single();
 
@@ -95,12 +95,23 @@ const getUserProfile = async ( req, res) => {
       return res.status(500).json({ message: "Failed to fetch user profile" });
     }
 
-    return res.status(200).json(data);
+    // Include the account balance in the response
+    const userProfile = {
+      email: data.email,
+      full_name: data.full_name,
+      date_of_birth: data.date_of_birth,
+      address: data.address,
+      identity_document: data.identity_document,
+      account_balance: data.account_balance,
+    };
+
+    return res.status(200).json(userProfile);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Failed to fetch user profile" });
   }
 };
+
 
 
 module.exports = {
