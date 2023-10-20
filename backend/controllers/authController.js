@@ -1,4 +1,5 @@
-const supabase = require("../config/supabaseConfig"); // Import the Supabase client
+const supabase = require("../config/supabaseConfig");
+console.log(supabase);
 
 // User registration
 const registerUser = async (req, res) => {
@@ -111,8 +112,6 @@ const getUserProfile = async (req, res) => {
     return res.status(500).json({ message: "Failed to fetch user profile" });
   }
 };
-
-
 
 module.exports = {
   registerUser,
