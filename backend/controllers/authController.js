@@ -1,5 +1,5 @@
 const supabase = require("../config/supabaseConfig");
-console.log(supabase);
+// console.log(supabase);
 
 // User registration
 const registerUser = async (req, res) => {
