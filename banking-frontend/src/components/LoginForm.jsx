@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,9 +25,9 @@ const LoginForm = () => {
     });
 
     if (response.status === 200) {
-      // Login successful, you can redirect the user or show a success message
+      navigate("/dashboard");
     } else {
-      // Handle login errors, show error messages, etc.
+      console.error("Error logging in:");
     }
   };
 
