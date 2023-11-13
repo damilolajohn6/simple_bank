@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/tailwind.css";
+import "../styles/tailwind-output.css";
+
 
 const LoginForm = () => {
   const navigate = useNavigate();

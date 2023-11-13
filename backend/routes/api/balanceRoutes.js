@@ -4,6 +4,6 @@ const requireAuth = require("../../middleware/authMiddleware");
 const balanceController = require("../../controllers/balanceController");
 
 // Get account balance (requires authentication)
-router.get("/balance", requireAuth, balanceController.getAccountBalance);
+router.get("/balance",  balanceController.getAccountBalance);
 
 module.exports = router;

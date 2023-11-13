@@ -86,9 +86,8 @@ const getCurrentUser = (req, res) => {
 const getUserProfile = async (req, res) => {
   try {
     const user = req.user; // Authenticated user obtained from middleware
-    const { data, error } = await supabase
-      .from("users")
-      .select("*") // Select all columns
+    const { data, error } = await supabase.from("users")
+      .select("*")
       .eq("email", user.email)
       .single();
 
@@ -113,6 +112,7 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+
 module.exports = {
   registerUser,
   loginUser,
@@ -120,3 +120,4 @@ module.exports = {
   getCurrentUser,
   getUserProfile,
 };
+

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../styles/tailwind.css";
+import "../styles/tailwind-output.css";
 
 
 const RegistrationForm = () => {
